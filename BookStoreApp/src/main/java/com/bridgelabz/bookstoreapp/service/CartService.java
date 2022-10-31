@@ -56,7 +56,7 @@ IBookService bookService;
     }
 
     @Override
-    public Cart changeCartQty(int userId, int cartId, int quantity) {
+    public String changeCartQty(int userId, int cartId, int quantity) {
         User user = userRepo.findById(userId).orElse(null);
         Cart cart = cartRepo.findById(cartId).orElse(null);
 
@@ -65,7 +65,8 @@ IBookService bookService;
             if(book != null){
                 cart.setQuantity(quantity);
                 cart.setTotalPrice(book.getBookPrice() * quantity);
-                return cartRepo.save(cart);
+                cartRepo.save(cart);
+                return "Updated with quantity : "+quantity;
             }
         }
         return null;
