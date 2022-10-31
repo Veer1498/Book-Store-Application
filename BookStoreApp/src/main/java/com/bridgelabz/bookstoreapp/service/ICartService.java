@@ -14,7 +14,7 @@ public interface ICartService {
     Cart addToCart(int userId, CartDto cartDto);
     String deleteById(int cartid);
 
-    Cart changeCartQty(int userId, int cartId, CartDto cartDto);
+    Cart changeCartQty(int userId, int cartId, int cartDto);
 
     List<Cart> findAll();
 

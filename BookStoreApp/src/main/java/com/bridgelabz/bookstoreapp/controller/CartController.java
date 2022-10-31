@@ -35,9 +35,9 @@ public class CartController {
         return new ResponseEntity(reponseDTO, HttpStatus.ACCEPTED);
     }
     //Ability to update  quantity
-    @PostMapping("/updatequantity/{userId}/{cartId}")
-    public ResponseEntity<ResponseDto> changeBookQuantity(@PathVariable int userId, @PathVariable int cartId, @RequestBody CartDto cartDto) {
-        Cart cart = cartService.changeCartQty(userId,cartId,cartDto);
+    @PutMapping("/updatequantity/{userId}/{cartId}")
+    public ResponseEntity<ResponseDto> changeBookQuantity(@PathVariable int userId, @PathVariable int cartId, @RequestParam int quantity) {
+        Cart cart = cartService.changeCartQty(userId,cartId,quantity);
         ResponseDto responseDTO = new ResponseDto("quantity of Cart Updated successfully", cart);
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
