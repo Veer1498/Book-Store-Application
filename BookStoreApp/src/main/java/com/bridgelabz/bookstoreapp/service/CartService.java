@@ -56,15 +56,15 @@ IBookService bookService;
     }
 
     @Override
-    public Cart changeCartQty(int userId, int cartId, CartDto cartDto) {
+    public Cart changeCartQty(int userId, int cartId, int quantity) {
         User user = userRepo.findById(userId).orElse(null);
-        Book book = bookRepo.findById(cartDto.getBookId()).orElse(null);
         Cart cart = cartRepo.findById(cartId).orElse(null);
+
         if(cart != null && user != null){
+            Book book = bookRepo.findById(cart.getBook().getBookId()).orElse(null);
             if(book != null){
-                cart.setBook(book);
-                cart.setQuantity(cartDto.getQuantity());
-                cart.setTotalPrice(book.getBookPrice() * cartDto.getQuantity());
+                cart.setQuantity(quantity);
+                cart.setTotalPrice(book.getBookPrice() * quantity);
                 return cartRepo.save(cart);
             }
         }
