@@ -12,4 +12,5 @@ public class OrderDto {
     private int quantity;
     private String address;
     private int bookId;
+    private int cartId;
 }
