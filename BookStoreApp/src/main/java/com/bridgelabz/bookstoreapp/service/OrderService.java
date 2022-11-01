@@ -43,10 +43,13 @@ public class OrderService implements IOrderService{
 
             //Remove Quantity of Books after Order Placed
             book.setBookQuantity(book.getBookQuantity()-orderDto.getQuantity());
-
             Order order = new Order(user,book,orderPrice,orderDto);
             orderRepo.save(order);
-            cartRepo.deleteAll();
+
+            //Delete Cart By Id
+            cartRepo.deleteById(orderDto.getCartId());
+
+            //Order Successful Mail
             mailService.sendEmail(user.getEmailId(),
                     "Your Order was Successfully Placed",
                     "Order Placed with Given Details \n"
@@ -66,13 +69,16 @@ public class OrderService implements IOrderService{
         if (user != null) {
             Order order = orderRepo.findById(orderId).orElse(null);
             Book book = bookRepo.findById(order.getBook().getBookId()).orElse(null);
+
             if (order != null) {
                 order.setCancel(true);
                 orderRepo.save(order);
+
                 //To Change Quantity after Calcellation of Order
                 book.setBookQuantity(book.getBookQuantity() + order.getQuantity());
+
                 //Cancel Mail
-                mailService.sendEmail(user.getEmailId(),"Your Order Was Successfully Cancelled","Order was Cancelled\nOrder Id:"+orderId);
+                mailService.sendEmail(user.getEmailId(),"Your Order Was Successfully Cancelled","Order was Cancelled with below ID\nOrder Id:"+orderId);
                 return "Order Cancelled";
             }
         }

@@ -37,7 +37,7 @@ public class CartController {
     //Ability to update  quantity
     @PutMapping("/updatequantity/{userId}/{cartId}")
     public ResponseEntity<ResponseDto> changeBookQuantity(@PathVariable int userId, @PathVariable int cartId, @RequestParam int quantity) {
-        Cart cart = cartService.changeCartQty(userId,cartId,quantity);
+        String cart = cartService.changeCartQty(userId,cartId,quantity);
         ResponseDto responseDTO = new ResponseDto("quantity of Cart Updated successfully", cart);
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
