@@ -14,6 +14,7 @@ import java.util.List;
  * Purpose : This Application is to control User and Book Services.
  * Author : Veer
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/book")
 public class BookController {
