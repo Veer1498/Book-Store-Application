@@ -23,14 +23,14 @@ public class User {
     private String firstName;
     private String lastName;
     private String emailId;
-    private LocalDate DOB;
+    private LocalDate date;
     private String password;
 
     public User(UserDto addressDto) {
         this.firstName = addressDto.getFirstName();
         this.lastName = addressDto.getLastName();
         this.emailId = addressDto.getEmailId();
-        this.DOB = addressDto.getDOB();
+        this.date = addressDto.getDate();
         this.password = addressDto.getPassword();
     }
 }
