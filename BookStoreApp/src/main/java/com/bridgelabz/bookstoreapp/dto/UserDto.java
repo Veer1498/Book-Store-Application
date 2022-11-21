@@ -17,7 +17,6 @@ public class UserDto {
     private String firstName;
     private String lastName;
     private String emailId;
-    @JsonFormat(pattern = "dd MMM yyyy")
-    private LocalDate DOB;
+    private LocalDate date;
     private String password;
 }
